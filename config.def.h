@@ -14,8 +14,6 @@ static const char unknown_str[] = "n/a";
  *
  * battery_perc        battery percentage              battery name (BAT0)
  *                                                     NULL on OpenBSD/FreeBSD
- * battery_state       battery charging state          battery name (BAT0)
- *                                                     NULL on OpenBSD/FreeBSD
  * battery_remaining   battery remaining HH:MM         battery name (BAT0)
  *                                                     NULL on OpenBSD/FreeBSD
  * cpu_perc            cpu usage in percent            NULL
@@ -61,7 +59,16 @@ static const char unknown_str[] = "n/a";
  * wifi_perc           WiFi signal in percent          interface name (wlan0)
  * wifi_essid          WiFi ESSID                      interface name (wlan0)
  */
-static const struct arg args[] = {
-	/* function format          argument */
-	{ datetime, "%s",           "%F %T" },
+ static const struct arg args[] = {
+	/* function, format, argument */
+	{ cpu_perc, "%3s%% ", NULL },
+	{ cpu_freq, "%7sHz | ", NULL },
+	{ ram_perc, "%3s%% ", NULL },
+	{ ram_total, "%s | ", NULL },
+	{ wifi_perc, "%3s%% ", "wlan0" },
+	{ wifi_essid, "%s | ", "wlan0" },
+	{ battery_perc, "%3s%%", "BAT0" },
+	{ battery_state, "%s", "BAT0" },
+	{ battery_state, "%s | ", "BAT0" },
+	{ datetime, "%s", "%a %F %T %Z" },
 };
